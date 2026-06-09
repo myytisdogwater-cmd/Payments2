@@ -5,16 +5,14 @@ export async function onRequestPost(context) {
     const body = await context.request.json();
     const { amount, purchase_order_id, purchase_order_name, return_url } = body;
 
-    // 🟢 Sandbox API endpoint URLs
     const KHALTI_API_URL = "https://dev.khalti.com/api/v2/epayment/initiate/";
     
-    // 🟢 Hardcoded Test Key Fallback (ensures it works even if Cloudflare env variables aren't bound yet)
-    const KHALTI_SECRET_KEY = "Key 4c90e29d4c1c4b4d994e1d1d86d63d84"; 
+    // 🟢 FIXED: Khalti Sandbox requires a lowercase "key" prefix for testing authentication
+    const KHALTI_SECRET_KEY = "key 05bf95cc57244045b8df5fad06748dab"; 
 
     const baseOrigin = new URL(return_url).origin;
 
-    // 🟢 SAFETY FIX: Khalti requires an amount >= 1000 paisa (Rs. 10). 
-    // If your cart is smaller than Rs. 10, this automatically scales it up so your test doesn't crash!
+    // Safety amount checker (Ensures total >= Rs. 10 to pass Khalti rules)
     let rawAmountInNpr = parseFloat(amount) || 10;
     if (rawAmountInNpr < 10) {
       rawAmountInNpr = 10; 
@@ -37,7 +35,7 @@ export async function onRequestPost(context) {
     const khaltiResponse = await fetch(KHALTI_API_URL, {
       method: "POST",
       headers: {
-        "Authorization": `Key ${KHALTI_SECRET_KEY}`,
+        "Authorization": KHALTI_SECRET_KEY, // 🟢 Passed cleanly using the lowercase key template
         "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
@@ -45,14 +43,12 @@ export async function onRequestPost(context) {
 
     const data = await khaltiResponse.json();
 
-    // If Khalti structural components are correct, return the redirect URL
     if (data.payment_url) {
       return new Response(JSON.stringify({ payment_url: data.payment_url }), {
         headers: { "Content-Type": "application/json" }
       });
     } else {
-      // 💡 LOG EXTRACTION: This outputs exactly why Khalti rejected the parameters in your Cloudflare console logs
-      console.error("Khalti Validation Error Details:", data);
+      console.error("Khalti Gateway Rejected Content:", data);
       return new Response(JSON.stringify({ error: "Khalti Initialization Failed", details: data }), {
         status: 400,
         headers: { "Content-Type": "application/json" }
@@ -66,7 +62,7 @@ export async function onRequestPost(context) {
   }
 }
 
-// 🟢 GET REDIRECT HANDLER (Processes return verification checks)
+// 🟢 GET REDIRECT HANDLER
 export async function onRequestGet(context) {
   try {
     const { searchParams, origin } = new URL(context.request.url);
@@ -83,12 +79,12 @@ export async function onRequestGet(context) {
     }
 
     const KHALTI_VERIFY_URL = "https://dev.khalti.com/api/v2/epayment/lookup/";
-    const KHALTI_SECRET_KEY = "Key 4c90e29d4c1c4b4d994e1d1d86d63d84"; 
+    const KHALTI_SECRET_KEY = "key 05bf95cc57244045b8df5fad06748dab"; // 🟢 Kept lowercase here too
 
     const verifyResponse = await fetch(KHALTI_VERIFY_URL, {
       method: "POST",
       headers: {
-        "Authorization": `Key ${KHALTI_SECRET_KEY}`,
+        "Authorization": KHALTI_SECRET_KEY,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ pidx })
