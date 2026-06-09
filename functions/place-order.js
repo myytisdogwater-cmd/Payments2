@@ -4,8 +4,9 @@ export async function onRequestPost(context) {
     const body = await context.request.json();
     const { amount, purchase_order_id, purchase_order_name, return_url } = body;
 
-    const KHALTI_API_URL = "https://a.khalti.com/api/v2/epayment/initiate/";
-    const KHALTI_SECRET_KEY = "Key 1234567890abcdef1234567890abcdef"; 
+    // Change these lines near the top of functions/place-order.js:
+const KHALTI_API_URL = "https://dev.khalti.com/api/v2/epayment/initiate/";
+const KHALTI_SECRET_KEY = "Key 4c90e29d4c1c4b4d994e1d1d86d63d84"; // 🟢 Official Khalti Sandbox Test Key
 
     // Safely extract the base domain without using .split() matching
     const baseOrigin = new URL(return_url).origin;
@@ -70,9 +71,9 @@ export async function onRequestGet(context) {
       return Response.redirect(`${origin}/checkout.html?status=failed`);
     }
 
-    // 1. Verify directly with Khalti's servers to prevent fraud injection
-    const KHALTI_VERIFY_URL = "https://dev.khalti.com/api/v2/epayment/lookup/";
-    const KHALTI_SECRET_KEY = "Key 1234567890abcdef1234567890abcdef"; 
+    // Change these lines inside your onRequestGet block:
+const KHALTI_VERIFY_URL = "https://dev.khalti.com/api/v2/epayment/lookup/";
+const KHALTI_SECRET_KEY = "Key 4c90e29d4c1c4b4d994e1d1d86d63d84"; // 🟢 Keep it matching!
 
     const verifyResponse = await fetch(KHALTI_VERIFY_URL, {
       method: "POST",
