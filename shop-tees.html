@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tees — UNICO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="cart.js"></script>
+</head>
+<body>
+
+<div id="loader"><div id="loader-logo">UNICO</div><div id="loader-bar"></div></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="landing.html" class="nav-logo">UNICO</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <a class="dropdown-trigger">Shop</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-menu-inner">
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Categories</div>
+              <a href="shop-hoodies.html">Hoodies</a>
+              <a href="shop-tees.html">Tees</a>
+              <a href="shop-bottoms.html">Bottoms</a>
+            </div>
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Collections</div>
+              <a href="landing.html#best-sellers">Best Sellers</a>
+              <a href="shop-hoodies.html">New Arrivals</a>
+              <a href="#">Limited Drops</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="checkout.html" class="nav-cart">Cart <span class="nav-cart-count">0</span></a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <strong style="padding:14px 16px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted)">Categories</strong>
+  <a href="shop-hoodies.html">Hoodies</a>
+  <a href="shop-tees.html">Tees</a>
+  <a href="shop-bottoms.html">Bottoms</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Collections</strong>
+  <a href="landing.html#best-sellers">Best Sellers</a>
+  <a href="shop-hoodies.html">New Arrivals</a>
+  <a href="#">Limited Drops</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Info</strong>
+  <a href="about.html">About</a>
+  <a href="checkout.html">Cart <span class="mobile-cart-count">(0)</span></a>
+</div>
+
+<main>
+  <section class="section" style="padding-top:calc(var(--nav-h) + 40px)">
+    <div class="section-header">
+      <h2>Basic Tee</h2>
+      <p>Premium essential tee in two earthy colorways. Premium cotton, clean fit.</p>
+    </div>
+    <div class="product-grid">
+      <a href="product.html?id=basic-tee" class="product-card">
+        <div class="product-card-image"><img src="mq2eb987-Tees-Red-2026-06-06-at-19.19.08.png" alt="Basic Tee" loading="lazy"></div>
+        <div class="product-card-body">
+          <div class="category-label">Tee</div>
+          <h3>Basic Tee</h3>
+          <div class="price">NPR 1,799</div>
+          <div class="color-swatches">
+            <span style="display:inline-flex;gap:6px;margin-top:8px">
+              <span style="width:16px;height:16px;border-radius:50%;background:#CC3333;display:inline-block;border:1.5px solid var(--border)" title="Red"></span>
+              <span style="width:16px;height:16px;border-radius:50%;background:#8B6F47;display:inline-block;border:1.5px solid var(--border)" title="Brown"></span>
+            </span>
+            <span style="font-size:0.75rem;color:var(--muted);margin-left:6px">2 colors</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <h3>UNICO</h3>
+      <p>Nepali casual wear, crafted for the everyday. From the heart of Kathmandu to the world.</p>
+      <div class="footer-social">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="shop-hoodies.html">Hoodies</a>
+      <a href="shop-tees.html">Tees</a>
+      <a href="shop-bottoms.html">Bottoms</a>
+      <a href="#">All Products</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Shipping &amp; Returns</a>
+      <a href="#">Size Guide</a>
+      <a href="#">FAQ</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 UNICO. Made in Nepal. &mdash; Crafted in Kathmandu</div>
+</footer>
+
+<script>
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('loader')?.classList.add('hide');
+  }, 400);
+});
+</script>
+</body>
+</html>

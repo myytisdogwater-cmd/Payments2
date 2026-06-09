@@ -1,0 +1,273 @@
+{
+  "schema": "open-design.design-manifest.v1",
+  "title": "011d4386-9812-4be2-b221-073d6f47dde2",
+  "entryFile": "index.html",
+  "sourceFiles": {
+    "all": [
+      "about.html",
+      "brand-spec.md",
+      "cart.js",
+      "checkout.html",
+      "index.html",
+      "landing.html",
+      "mq2cswsr-Hoodie-Black-2026-06-06-at-18.07.06.png",
+      "mq2cswsx-Hoodie-Black-2026-06-06-at-18.08.22.png",
+      "mq2cswt5-Hoodie-Blue-2026-06-06-at-18.11.50.png",
+      "mq2cswtd-Hoodie-Blue-2026-06-06-at-18.12.02.png",
+      "mq2cswtl-Hoodie-Green-2026-06-06-at-18.09.03.png",
+      "mq2cswts-Hoodie-Green-2026-06-06-at-18.09.08.png",
+      "mq2cswty-Hoodie-Navy-2026-06-06-at-18.11.30.png",
+      "mq2cswu6-Hoodie-Navy-2026-06-06-at-18.11.37.png",
+      "mq2ct556-Pants-Black-2026-06-06-at-18.01.16.png",
+      "mq2ct55e-Pants-Black-2026-06-06-at-18.01.24.png",
+      "mq2ct55m-Pants-Gray-2026-06-06-at-18.03.01.png",
+      "mq2ct55s-Pants-Gray-2026-06-06-at-18.03.34.png",
+      "mq2cttyc-Screen-Shot-2026-06-06-at-18.38.45.png",
+      "mq2dgxc3-mpxx4xxm-Go-behind-the-scenes-with-us-and-see-what-makes-our-_Powered-By-Enthusiasts_-hoodie-collection-c.mp4",
+      "mq2dotdj-Screen-Shot-2026-06-06-at-19.02.52.png",
+      "mq2dpvk7-Screen-Shot-2026-06-06-at-19.03.43.png",
+      "mq2eb95d-Tees-Brown-2026-06-06-at-19.19.40.png",
+      "mq2eb96g-Tees-Brown-2026-06-06-at-19.19.34.png",
+      "mq2eb97t-Tees-Red-2026-06-06-at-19.19.17.png",
+      "mq2eb987-Tees-Red-2026-06-06-at-19.19.08.png",
+      "product.html",
+      "shop-bottoms.html",
+      "shop-hoodies.html",
+      "shop-tees.html",
+      "styles.css",
+      "unico-product-detail.html"
+    ],
+    "html": [
+      "about.html",
+      "checkout.html",
+      "index.html",
+      "landing.html",
+      "product.html",
+      "shop-bottoms.html",
+      "shop-hoodies.html",
+      "shop-tees.html",
+      "unico-product-detail.html"
+    ],
+    "css": [
+      "styles.css"
+    ],
+    "scriptsAndComponents": [
+      "cart.js"
+    ],
+    "assets": [
+      "brand-spec.md",
+      "mq2cswsr-Hoodie-Black-2026-06-06-at-18.07.06.png",
+      "mq2cswsx-Hoodie-Black-2026-06-06-at-18.08.22.png",
+      "mq2cswt5-Hoodie-Blue-2026-06-06-at-18.11.50.png",
+      "mq2cswtd-Hoodie-Blue-2026-06-06-at-18.12.02.png",
+      "mq2cswtl-Hoodie-Green-2026-06-06-at-18.09.03.png",
+      "mq2cswts-Hoodie-Green-2026-06-06-at-18.09.08.png",
+      "mq2cswty-Hoodie-Navy-2026-06-06-at-18.11.30.png",
+      "mq2cswu6-Hoodie-Navy-2026-06-06-at-18.11.37.png",
+      "mq2ct556-Pants-Black-2026-06-06-at-18.01.16.png",
+      "mq2ct55e-Pants-Black-2026-06-06-at-18.01.24.png",
+      "mq2ct55m-Pants-Gray-2026-06-06-at-18.03.01.png",
+      "mq2ct55s-Pants-Gray-2026-06-06-at-18.03.34.png",
+      "mq2cttyc-Screen-Shot-2026-06-06-at-18.38.45.png",
+      "mq2dgxc3-mpxx4xxm-Go-behind-the-scenes-with-us-and-see-what-makes-our-_Powered-By-Enthusiasts_-hoodie-collection-c.mp4",
+      "mq2dotdj-Screen-Shot-2026-06-06-at-19.02.52.png",
+      "mq2dpvk7-Screen-Shot-2026-06-06-at-19.03.43.png",
+      "mq2eb95d-Tees-Brown-2026-06-06-at-19.19.40.png",
+      "mq2eb96g-Tees-Brown-2026-06-06-at-19.19.34.png",
+      "mq2eb97t-Tees-Red-2026-06-06-at-19.19.17.png",
+      "mq2eb987-Tees-Red-2026-06-06-at-19.19.08.png"
+    ]
+  },
+  "screens": [
+    {
+      "file": "about.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "checkout.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "index.html",
+      "role": "launcher-overview",
+      "implementationNote": "Use this as the navigation/overview entry only; implement each linked screen file as its own route/surface."
+    },
+    {
+      "file": "landing.html",
+      "role": "landing-page",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "product.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "shop-bottoms.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "shop-hoodies.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "shop-tees.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "unico-product-detail.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    }
+  ],
+  "screenFilePolicy": {
+    "mode": "screen-file-first",
+    "entryFileRole": "launcher-overview",
+    "rules": [
+      "Each distinct user-facing screen or surface must be delivered and implemented as its own file/route.",
+      "If a landing page is present or requested, keep it in landing.html and do not merge it into the product app screen.",
+      "When multiple HTML screens exist, index.html is a launcher/overview only; it must not be treated as the combined final UI.",
+      "Keep product app screens, landing pages, platform screens, and OS widget surfaces separate in production code."
+    ]
+  },
+  "appModules": [
+    "Identify domain-specific in-app modules from the exported UI; do not reduce them to generic cards.",
+    "For each major module, implement purpose, default/loading/empty/error/success states, and responsive behavior.",
+    "Keep app modules separate from OS home-screen widgets in the production component model."
+  ],
+  "osWidgets": [
+    "If the export includes home-screen, lock-screen, Live Activity, tablet glance, or Android widget surfaces, implement them as platform quick-access surfaces outside the app UI.",
+    "If none are present, do not invent OS widgets unless the product requirements request them."
+  ],
+  "landingPage": {
+    "detection": "Inspect files and screen names for a marketing/landing page surface. If present, keep it separate from product app screens.",
+    "requiredSections": [
+      "hero",
+      "value props",
+      "product proof/screenshots",
+      "feature proof",
+      "CTA"
+    ]
+  },
+  "tokens": {
+    "source": [
+      "styles.css"
+    ],
+    "required": [
+      "background",
+      "surface",
+      "foreground",
+      "muted text",
+      "border",
+      "accent",
+      "radius",
+      "shadow",
+      "spacing",
+      "type scale",
+      "motion"
+    ],
+    "note": "Extract/freeze tokens before framework implementation so coding tools do not substitute default theme colors or typography."
+  },
+  "interactions": {
+    "source": [
+      "cart.js"
+    ],
+    "requiredStates": [
+      "default",
+      "hover",
+      "focus",
+      "active",
+      "disabled",
+      "loading",
+      "empty",
+      "error",
+      "success"
+    ],
+    "requiredBehaviors": [
+      "forms/validation where present",
+      "tabs/filters where present",
+      "dialogs/sheets/drawers where present",
+      "copy/generate/share actions where present",
+      "player or quick controls where present"
+    ],
+    "note": "If the prototype is static, derive missing behavior from visible controls and document it before coding."
+  },
+  "responsiveViewports": [
+    {
+      "name": "mobile-compact",
+      "width": 360,
+      "height": 800,
+      "category": "mobile",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "mobile-standard",
+      "width": 390,
+      "height": 844,
+      "category": "mobile",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "mobile-large",
+      "width": 430,
+      "height": 932,
+      "category": "mobile",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "foldable-small-tablet",
+      "width": 600,
+      "height": 960,
+      "category": "foldable-tablet",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "tablet-portrait",
+      "width": 820,
+      "height": 1180,
+      "category": "tablet",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "tablet-landscape",
+      "width": 1024,
+      "height": 768,
+      "category": "tablet",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "laptop",
+      "width": 1366,
+      "height": 768,
+      "category": "desktop",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "category": "desktop",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "wide",
+      "width": 1920,
+      "height": 1080,
+      "category": "wide",
+      "mustAvoidHorizontalScroll": true
+    }
+  ],
+  "implementationChecklist": [
+    "Open entryFile first and map screens, modules, tokens, and interactions.",
+    "Extract tokens before writing framework components.",
+    "Implement app-specific modules with real states instead of generic card grids.",
+    "Preserve or rebuild JS interactions for meaningful UX actions.",
+    "Validate screenshots at desktop/tablet/mobile viewports with no horizontal overflow.",
+    "Keep landing pages, in-app modules, and OS widgets as separate implementation surfaces."
+  ]
+}

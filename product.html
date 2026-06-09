@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product — UNICO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.product-detail {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: calc(var(--nav-h) + 40px) 24px 60px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: start;
+}
+.product-gallery { position: sticky; top: calc(var(--nav-h) + 24px); }
+.product-main-img {
+  width: 100%; aspect-ratio: 3/4;
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--surface);
+}
+.product-main-img img { width: 100%; height: 100%; object-fit: cover; }
+.product-thumbs {
+  display: flex; gap: 10px; margin-top: 12px;
+}
+.product-thumb {
+  width: 72px; height: 96px; border-radius: var(--radius-sm);
+  overflow: hidden; cursor: pointer; border: 2px solid transparent;
+  transition: border-color 0.2s; background: var(--surface);
+}
+.product-thumb.active { border-color: var(--accent); }
+.product-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.product-info { padding-top: 4px; }
+.product-category {
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); margin-bottom: 8px; font-weight: 500;
+}
+.product-info h1 { margin-bottom: 8px; }
+.product-price {
+  font-family: var(--font-display); font-size: 1.6rem;
+  color: var(--accent); margin-bottom: 20px;
+}
+.product-description {
+  font-size: 1rem; line-height: 1.7; margin-bottom: 28px;
+}
+.size-selector { margin-bottom: 24px; }
+.size-selector label {
+  display: block; font-size: 0.85rem; font-weight: 500;
+  margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.size-options { display: flex; gap: 8px; }
+.size-btn {
+  width: 48px; height: 48px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: oklch(99% 0.002 85);
+  font-size: 0.9rem; font-weight: 500; color: var(--fg);
+  transition: all 0.2s;
+}
+.size-btn:hover { border-color: var(--accent); }
+.size-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+.qty-selector {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+}
+.qty-selector label { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+.qty-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: oklch(99% 0.002 85);
+  font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.qty-btn:hover { border-color: var(--accent); }
+.qty-value {
+  font-size: 1.1rem; font-weight: 600; min-width: 24px; text-align: center;
+}
+.add-to-cart-btn {
+  width: 100%; padding: 16px; border-radius: var(--radius-md);
+  background: var(--accent); color: #fff; border: none;
+  font-size: 1rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.2s; margin-bottom: 12px;
+}
+.add-to-cart-btn:hover { background: var(--hover); transform: translateY(-1px); }
+.add-to-cart-btn.added { background: #4CAF50; }
+.view-cart-btn {
+  width: 100%; padding: 12px; border-radius: var(--radius-md);
+  background: transparent; border: 1.5px solid var(--border);
+  font-size: 0.9rem; font-weight: 500; display: none;
+  align-items: center; justify-content: center; gap: 6px;
+  transition: all 0.2s; margin-bottom: 32px;
+}
+.view-cart-btn:hover { border-color: var(--accent); }
+.view-cart-btn.show { display: flex; }
+.product-extra { border-top: 1px solid var(--border); padding-top: 24px; }
+.product-extra h3 {
+  font-size: 1rem; font-family: var(--font-body); font-weight: 600;
+  margin-bottom: 8px;
+}
+.product-extra p { font-size: 0.9rem; margin-bottom: 16px; }
+.product-extra ul { list-style: none; padding: 0; }
+.product-extra ul li {
+  padding: 8px 0; font-size: 0.9rem; color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.product-extra ul li:last-child { border-bottom: none; }
+.product-not-found {
+  text-align: center; padding: calc(var(--nav-h) + 80px) 24px 80px;
+}
+.product-not-found h2 { margin-bottom: 12px; }
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.9rem; color: var(--muted); margin-bottom: 20px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--fg); }
+
+.color-swatch-btn { outline: none; }
+.color-swatch-btn.active { border-color: var(--fg); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--fg); }
+
+@media (max-width: 768px) {
+  .product-detail { grid-template-columns: 1fr; gap: 28px; }
+  .product-gallery { position: static; }
+  .product-info h1 { font-size: 1.6rem; }
+}
+@media (max-width: 480px) {
+  .size-options { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="landing.html" class="nav-logo">UNICO</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <a class="dropdown-trigger">Shop</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-menu-inner">
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Categories</div>
+              <a href="shop-hoodies.html">Hoodies</a>
+              <a href="shop-tees.html">Tees</a>
+              <a href="shop-bottoms.html">Bottoms</a>
+            </div>
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Collections</div>
+              <a href="landing.html#best-sellers">Best Sellers</a>
+              <a href="shop-hoodies.html">New Arrivals</a>
+              <a href="#">Limited Drops</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="checkout.html" class="nav-cart">Cart <span class="nav-cart-count">0</span></a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <strong style="padding:14px 16px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted)">Categories</strong>
+  <a href="shop-hoodies.html">Hoodies</a>
+  <a href="shop-tees.html">Tees</a>
+  <a href="shop-bottoms.html">Bottoms</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Collections</strong>
+  <a href="landing.html#best-sellers">Best Sellers</a>
+  <a href="shop-hoodies.html">New Arrivals</a>
+  <a href="#">Limited Drops</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Info</strong>
+  <a href="about.html">About</a>
+  <a href="checkout.html">Cart <span class="mobile-cart-count">(0)</span></a>
+</div>
+
+<main id="app"></main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <h3>UNICO</h3>
+      <p>Nepali casual wear, crafted for the everyday. From the heart of Kathmandu to the world.</p>
+      <div class="footer-social">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="shop-hoodies.html">Hoodies</a>
+      <a href="shop-tees.html">Tees</a>
+      <a href="shop-bottoms.html">Bottoms</a>
+      <a href="#">All Products</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Shipping &amp; Returns</a>
+      <a href="#">Size Guide</a>
+      <a href="#">FAQ</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 UNICO. Made in Nepal. &mdash; Crafted in Kathmandu</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script src="cart.js"></script>
+<script>
+const PRODUCTS = [
+  { id:'heavyweight-hoodie', name:'Heavyweight Hoodie', category:'Hoodie', price:2999,
+    colorVariants:[
+      {color:'Black', images:['mq2cswsr-Hoodie-Black-2026-06-06-at-18.07.06.png','mq2cswsx-Hoodie-Black-2026-06-06-at-18.08.22.png']},
+      {color:'Blue', images:['mq2cswtd-Hoodie-Blue-2026-06-06-at-18.12.02.png','mq2cswt5-Hoodie-Blue-2026-06-06-at-18.11.50.png']},
+      {color:'Green', images:['mq2cswts-Hoodie-Green-2026-06-06-at-18.09.08.png','mq2cswtl-Hoodie-Green-2026-06-06-at-18.09.03.png']},
+      {color:'Navy', images:['mq2cswu6-Hoodie-Navy-2026-06-06-at-18.11.37.png','mq2cswty-Hoodie-Navy-2026-06-06-at-18.11.30.png']}
+    ],
+    description:'Premium heavyweight cotton hoodie — available in four distinct colors. Clean lines, no branding, just pure comfort.',
+    details:'Premium 400GSM cotton fleece. Double-stitched seams. Ribbed cuffs and hem. Kangaroo pocket.',
+    care:'Machine wash cold. Tumble dry low. Do not bleach.',
+    sizes:['S','M','L','XL','XXL'], catPage:'shop-hoodies.html' },
+  { id:'basic-tee', name:'Basic Tee', category:'Tee', price:1799, colorVariants:[{color:'Red',images:['mq2eb987-Tees-Red-2026-06-06-at-19.19.08.png','mq2eb97t-Tees-Red-2026-06-06-at-19.19.17.png']},{color:'Brown',images:['mq2eb95d-Tees-Brown-2026-06-06-at-19.19.40.png','mq2eb96g-Tees-Brown-2026-06-06-at-19.19.34.png']}], description:'A premium essential tee, available in two earthy colorways. Clean fit, soft handfeel — the foundation of every wardrobe.', details:'260GSM premium cotton jersey. Reinforced neck seam. Taped shoulder seams. Side-seamed for a better fit.', care:'Machine wash cold inside out. Tumble dry low. Do not bleach.', sizes:['S','M','L','XL','XXL'], catPage:'shop-tees.html' },
+  { id:'cargo-pants', name:'Cargo Pants', category:'Bottoms', price:2499, colorVariants:[{color:'Black',images:['mq2ct55e-Pants-Black-2026-06-06-at-18.01.24.png','mq2ct556-Pants-Black-2026-06-06-at-18.01.16.png']},{color:'Ash',images:['mq2ct55s-Pants-Gray-2026-06-06-at-18.03.34.png','mq2ct55m-Pants-Gray-2026-06-06-at-18.03.01.png']}], description:'Modern cargo pants with a clean taper — available in two versatile colors. Premium cotton twill, built for everyday wear.', details:'Premium cotton twill. Tapered fit. Zip fly with button closure. Two side pockets, two back pockets.', care:'Machine wash cold. Tumble dry low. Iron on low heat.', sizes:['28','30','32','34','36'], catPage:'shop-bottoms.html' }
+];
+
+function getProduct(id) { return PRODUCTS.find(p => p.id === id); }
+
+let selectedColor = null;
+let currentSize = null;
+let qty = 1;
+
+function getImages(p) {
+  if (p.colorVariants) {
+    const v = p.colorVariants.find(c => c.color === selectedColor) || p.colorVariants[0];
+    return v.images.length ? v.images : [null];
+  }
+  return p.images && p.images.length ? p.images : [null];
+}
+
+function render() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const p = getProduct(id);
+
+  const app = document.getElementById('app');
+  if (!p) {
+    app.innerHTML = `
+      <div class="product-not-found">
+        <h2>Product not found</h2>
+        <p style="margin-bottom:20px">The product you're looking for doesn't exist or has been removed.</p>
+        <a href="shop-hoodies.html" class="btn btn-primary">Shop All Products</a>
+      </div>`;
+    document.title = 'Product not found — UNICO';
+    return;
+  }
+
+  selectedColor = p.colorVariants ? p.colorVariants[0].color : null;
+  document.title = `${p.name} — UNICO`;
+  const imgs = getImages(p);
+  const hasGal = imgs.length > 1;
+  const fmt = n => 'NPR ' + n.toLocaleString('en-IN');
+
+  let colorHtml = '';
+  if (p.colorVariants) {
+    const swatchColors = {Red:'#CC3333',Brown:'#8B6F47',Black:'#1a1a1a',Blue:'#4A7FB5',Green:'#4A7A4A',Navy:'#1B2A4A',Ash:'#9E9E9E'};
+    colorHtml = `<div class="color-selector" style="margin-bottom:20px">
+      <label style="display:block;font-size:0.85rem;font-weight:500;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em">Color</label>
+      <div style="display:flex;gap:10px">`;
+    p.colorVariants.forEach((v, i) => {
+      const active = i === 0 ? ' active' : '';
+      colorHtml += `<button class="color-swatch-btn${active}" data-color="${v.color}" onclick="selectColor('${v.color}')" style="width:44px;height:44px;border-radius:50%;border:2px solid transparent;background:${swatchColors[v.color] || '#888'};cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;font-size:0" title="${v.color}">
+        ${active ? '<span style="color:#fff;font-size:1rem">&#10003;</span>' : ''}
+      </button>`;
+    });
+    colorHtml += `</div></div>`;
+  }
+
+  let thumbsHtml = '';
+  if (hasGal) {
+    thumbsHtml = `<div class="product-thumbs">`;
+    imgs.forEach((img, i) => {
+      thumbsHtml += `<div class="product-thumb${i===0?' active':''}" data-idx="${i}" onclick="switchImg(${i})">
+        ${img ? `<img src="${img}" alt="${p.name}">` : `<div style="width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.6rem">—</div>`}
+      </div>`;
+    });
+    thumbsHtml += `</div>`;
+  }
+
+  const defaultImg = imgs[0] ? `<img src="${imgs[0]}" alt="${p.name}" id="mainImg">` : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.9rem;background:var(--surface)">Photo —</div>`;
+
+  app.innerHTML = `
+    <a href="${p.catPage}" class="back-link" style="display:inline-flex;margin:calc(var(--nav-h) + 24px) 24px 0;max-width:var(--max-w);margin-left:auto;margin-right:auto">&larr; Back to ${p.category}s</a>
+    <div class="product-detail">
+      <div class="product-gallery">
+        <div class="product-main-img" id="mainImgWrap">${defaultImg}</div>
+        ${thumbsHtml}
+      </div>
+      <div class="product-info">
+        <div class="product-category">${p.category}</div>
+        <h1>${p.name}</h1>
+        <div class="product-price">${fmt(p.price)}</div>
+        <p class="product-description">${p.description}</p>
+
+        ${colorHtml}
+
+        <div class="size-selector">
+          <label>Select Size</label>
+          <div class="size-options" id="sizeOptions">
+            ${p.sizes.map(s => `<button class="size-btn" data-size="${s}" onclick="selectSize(this)">${s}</button>`).join('')}
+          </div>
+        </div>
+
+        <div class="qty-selector">
+          <label>Qty</label>
+          <button class="qty-btn" onclick="changeQty(-1)">&minus;</button>
+          <span class="qty-value" id="qtyVal">1</span>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+
+        <button class="add-to-cart-btn" id="addToCartBtn" onclick="addToCart()">
+          Add to Cart &mdash; ${fmt(p.price)}
+        </button>
+        <a href="checkout.html" class="view-cart-btn" id="viewCartBtn">View Cart &rarr;</a>
+
+        <div class="product-extra">
+          <h3>Details</h3>
+          <p>${p.details}</p>
+          <h3>Care</h3>
+          <p>${p.care}</p>
+          <ul>
+            <li>Free shipping on orders over NPR 5,000</li>
+            <li>Easy returns within 14 days</li>
+            <li>Handcrafted in Kathmandu, Nepal</li>
+          </ul>
+        </div>
+      </div>
+    </div>`;
+  currentSize = null;
+}
+
+function selectColor(color) {
+  const params = new URLSearchParams(window.location.search);
+  const p = getProduct(params.get('id'));
+  if (!p || !p.colorVariants) return;
+  selectedColor = color;
+  const variant = p.colorVariants.find(v => v.color === color);
+  if (!variant) return;
+
+  document.querySelectorAll('.color-swatch-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.color === color);
+    b.innerHTML = b.dataset.color === color ? '<span style="color:#fff;font-size:1rem">&#10003;</span>' : '';
+  });
+
+  const imgs = variant.images;
+  if (imgs.length) {
+    document.getElementById('mainImg').src = imgs[0];
+  }
+  let thumbsHtml = '';
+  if (imgs.length > 1) {
+    thumbsHtml = `<div class="product-thumbs">`;
+    imgs.forEach((img, i) => {
+      thumbsHtml += `<div class="product-thumb${i===0?' active':''}" data-idx="${i}" onclick="switchImg(${i})">
+        ${img ? `<img src="${img}" alt="">` : `<div style="width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.6rem">—</div>`}
+      </div>`;
+    });
+    thumbsHtml += `</div>`;
+    const existing = document.querySelector('.product-gallery .product-thumbs');
+    if (existing) existing.outerHTML = thumbsHtml;
+    else document.querySelector('.product-gallery').insertAdjacentHTML('beforeend', thumbsHtml);
+  }
+}
+
+function selectSize(el) {
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentSize = el.dataset.size;
+}
+
+function changeQty(d) {
+  qty = Math.max(1, qty + d);
+  document.getElementById('qtyVal').textContent = qty;
+}
+
+function addToCart() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const p = getProduct(id);
+  if (!p) return;
+
+  if (!currentSize) {
+    showToast('Please select a size first.');
+    return;
+  }
+
+  const imgs = getImages(p);
+
+  Cart.add({
+    id: p.id,
+    name: p.name,
+    image: imgs[0] || '',
+    price: p.price,
+    size: currentSize,
+    color: p.colorVariants ? selectedColor : null,
+    qty: qty
+  });
+
+  const btn = document.getElementById('addToCartBtn');
+  btn.textContent = 'Added to Cart!';
+  btn.classList.add('added');
+  document.getElementById('viewCartBtn').classList.add('show');
+  showToast(`${p.name} — ${selectedColor || ''} (${currentSize}) added to cart`);
+}
+
+function switchImg(idx) {
+  const params = new URLSearchParams(window.location.search);
+  const p = getProduct(params.get('id'));
+  if (!p) return;
+  const imgs = getImages(p);
+  if (!imgs[idx]) return;
+  document.getElementById('mainImg').src = imgs[idx];
+  document.querySelectorAll('.product-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+render();
+</script>
+
+</body>
+</html>

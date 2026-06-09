@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — UNICO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="cart.js"></script>
+<style>
+.checkout-title { font-size: 1.6rem; margin-bottom: 28px; }
+.form-section { margin-bottom: 36px; }
+.form-section h3 { font-size: 1.05rem; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+.payment-option .pay-icon-esewa { background: #1AB394; color: #fff; }
+.payment-option .pay-icon-khalti { background: #7749F8; color: #fff; }
+.payment-option .pay-icon-ips { background: #E31B23; color: #fff; }
+.payment-option .pay-icon-cod { background: var(--surface); color: var(--fg); }
+
+.order-thankyou { display: none; text-align: center; padding: 60px 24px; max-width: 520px; margin: 0 auto; }
+.order-thankyou.show { display: block; }
+.order-thankyou .check-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: #4CAF50; color: #fff; font-size: 1.8rem;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.coupon-row { display: flex; gap: 8px; margin-top: 16px; }
+.coupon-row input { flex: 1; padding: 10px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border); font-size: 0.85rem; outline: none; }
+.coupon-row button { padding: 10px 16px; border-radius: var(--radius-md); background: var(--surface); border: 1.5px solid var(--border); font-weight: 500; font-size: 0.85rem; white-space: nowrap; }
+
+#checkoutForm.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div id="loader"><div id="loader-logo">UNICO</div><div id="loader-bar"></div></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="landing.html" class="nav-logo">UNICO</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <a class="dropdown-trigger">Shop</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-menu-inner">
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Categories</div>
+              <a href="shop-hoodies.html">Hoodies</a>
+              <a href="shop-tees.html">Tees</a>
+              <a href="shop-bottoms.html">Bottoms</a>
+            </div>
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Collections</div>
+              <a href="landing.html#best-sellers">Best Sellers</a>
+              <a href="shop-hoodies.html">New Arrivals</a>
+              <a href="#">Limited Drops</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="checkout.html" class="nav-cart">Cart <span class="nav-cart-count">0</span></a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <strong style="padding:14px 16px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted)">Categories</strong>
+  <a href="shop-hoodies.html">Hoodies</a>
+  <a href="shop-tees.html">Tees</a>
+  <a href="shop-bottoms.html">Bottoms</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Collections</strong>
+  <a href="landing.html#best-sellers">Best Sellers</a>
+  <a href="shop-hoodies.html">New Arrivals</a>
+  <a href="#">Limited Drops</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Info</strong>
+  <a href="about.html">About</a>
+  <a href="checkout.html">Cart <span class="mobile-cart-count">(0)</span></a>
+</div>
+
+<div class="checkout-layout" id="checkoutForm">
+  <div>
+    <h1 class="checkout-title">Checkout</h1>
+
+    <div class="form-section">
+      <h3>Shipping Information</h3>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" placeholder="Ram Sharma" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="ram@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="98XXXXXXXX" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" placeholder="Street, ward number" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" placeholder="Kathmandu" required>
+        </div>
+        <div class="form-group">
+          <label for="province">Province</label>
+          <select id="province">
+            <option>Bagmati</option>
+            <option>Koshi</option>
+            <option>Madhesh</option>
+            <option>Gandaki</option>
+            <option>Lumbini</option>
+            <option>Karnali</option>
+            <option>Sudurpashchim</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Payment Method</h3>
+      <div class="payment-methods" id="paymentMethods">
+        <label class="payment-option selected" data-value="esewa">
+          <input type="radio" name="payment" value="esewa" checked>
+          <div class="payment-icon pay-icon-esewa">eSewa</div>
+          <div class="payment-option-info">
+            <strong>eSewa</strong>
+            <span>Pay via eSewa wallet securely</span>
+          </div>
+        </label>
+        <label class="payment-option" data-value="khalti">
+          <input type="radio" name="payment" value="khalti">
+          <div class="payment-icon pay-icon-khalti">Khalti</div>
+          <div class="payment-option-info">
+            <strong>Khalti</strong>
+            <span>Pay via Khalti digital wallet</span>
+          </div>
+        </label>
+        <label class="payment-option" data-value="cod">
+          <input type="radio" name="payment" value="cod">
+          <div class="payment-icon pay-icon-cod">COD</div>
+          <div class="payment-option-info">
+            <strong>Cash on Delivery</strong>
+            <span>Pay when you receive your order</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Order Notes</h3>
+      <div class="form-group">
+        <textarea id="notes" rows="3" placeholder="Any special instructions? (optional)" style="resize:vertical"></textarea>
+      </div>
+    </div>
+
+    <button class="btn btn-primary place-order" id="placeOrderBtn" onclick="placeOrder()" style="width:auto;min-width:200px">Place Order</button>
+  </div>
+
+  <div class="order-summary" id="orderSummary">
+    <h3>Order Summary</h3>
+    <div id="orderItems"></div>
+    <div class="coupon-row">
+      <input type="text" placeholder="Coupon code" id="couponInput">
+      <button onclick="applyCoupon()">Apply</button>
+    </div>
+    <div class="summary-line"><span>Subtotal</span><span id="subtotalVal">NPR 0</span></div>
+    <div class="summary-line"><span>Shipping</span><span id="shippingVal">NPR 200</span></div>
+    <div class="summary-line"><span>Discount</span><span id="discountVal" style="color:#4CAF50">-NPR 0</span></div>
+    <div class="summary-line total"><span>Total</span><span id="totalVal">NPR 0</span></div>
+  </div>
+</div>
+
+<div class="order-thankyou" id="orderThankyou">
+  <div class="check-icon">&#10003;</div>
+  <h2 style="margin-bottom:8px">Thank you for your order!</h2>
+  <p style="margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto">Your UNICO order has been placed. You'll receive a confirmation email shortly.</p>
+  <div style="background:var(--surface);border-radius:var(--radius-md);padding:16px;margin-bottom:24px;text-align:left;font-size:0.9rem">
+    <div style="margin-bottom:8px"><strong>Order Transaction:</strong> <span id="orderUuid">#UNICO-INIT</span></div>
+    <div><strong>Payment Gateway:</strong> <span id="paidVia">eSewa</span></div>
+  </div>
+  <a href="landing.html" class="btn btn-outline">Continue Shopping</a>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+document.querySelectorAll('.payment-option').forEach(el => {
+  el.addEventListener('click', function() {
+    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+    this.classList.add('selected');
+    this.querySelector('input[type="radio"]').checked = true;
+  });
+});
+
+const fmt = n => 'NPR ' + n.toLocaleString('en-IN');
+
+function renderCartSummary() {
+  const items = Cart.get();
+  const container = document.getElementById('orderItems');
+  const btn = document.getElementById('placeOrderBtn');
+
+  if (!items.length) {
+    container.innerHTML = '<div style="padding:20px 0;text-align:center;color:var(--muted)">Your cart is empty.</div>';
+    btn.disabled = true; btn.style.opacity = '0.4'; btn.textContent = 'Cart is empty';
+    return;
+  }
+
+  let html = '';
+  items.forEach(p => {
+    const img = p.image ? `<img src="${p.image}" alt="${p.name}">` : '';
+    html += `<div class="order-item">
+      <div class="order-item-img">${img}</div>
+      <div class="order-item-details"><h4>${p.name}</h4><p>Qty: ${p.qty} / Size: ${p.size}</p></div>
+      <div class="order-item-price">${fmt(p.price * p.qty)}</div>
+    </div>`;
+  });
+  container.innerHTML = html;
+
+  const subtotal = Cart.total();
+  const shipping = subtotal >= 5000 ? 0 : 200;
+  const discount = window._couponApplied ? Math.round(subtotal * 0.1) : 0;
+  const finalTotal = subtotal + shipping - discount;
+
+  document.getElementById('subtotalVal').textContent = fmt(subtotal);
+  document.getElementById('shippingVal').textContent = shipping === 0 ? 'FREE' : fmt(shipping);
+  document.getElementById('discountVal').textContent = discount > 0 ? '-' + fmt(discount) : '-NPR 0';
+  document.getElementById('totalVal').textContent = fmt(finalTotal);
+
+  btn.disabled = false; btn.style.opacity = '1';
+  btn.textContent = `Place Order — ${fmt(finalTotal)}`;
+}
+
+function applyCoupon() {
+  if (document.getElementById('couponInput').value.trim().toUpperCase() === 'UNICO10') {
+    window._couponApplied = true; renderCartSummary();
+    showToast('Coupon applied!');
+  } else { showToast('Invalid coupon.'); }
+}
+async function placeOrder() {
+  const items = Cart.get();
+  if (!items.length) return;
+
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const addr = document.getElementById('address').value.trim();
+  const city = document.getElementById('city').value.trim();
+
+  if (!name || !email || !phone || !addr || !city) {
+    showToast('Please fill in all shipping fields.');
+    return;
+  }
+
+  const method = document.querySelector('input[name="payment"]:checked').value;
+  const btn = document.getElementById('placeOrderBtn');
+  btn.disabled = true; btn.textContent = 'Connecting Gateway...';
+
+  const subtotal = Cart.total();
+  const shipping = subtotal >= 5000 ? 0 : 200;
+  const discount = window._couponApplied ? Math.round(subtotal * 0.1) : 0;
+  const finalTotal = subtotal + shipping - discount;
+  const transactionUuid = 'UNICO-' + Date.now();
+
+  // 🟢 METHOD 1: ESEWA DIRECT CLIENT HANDSHAKE
+  if (method === 'esewa') {
+    const productCode = 'EPAYTEST';
+    const secretKey = '8gBm/:&EnhH.1/q';
+    const signatureMessage = `total_amount=${finalTotal},transaction_uuid=${transactionUuid},product_code=${productCode}`;
+    
+    try {
+      const encoder = new TextEncoder();
+      const keyData = encoder.encode(secretKey);
+      const messageData = encoder.encode(signatureMessage);
+      const cryptoKey = await window.crypto.subtle.importKey('raw', keyData, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+      const signatureBuffer = await window.crypto.subtle.sign('HMAC', cryptoKey, messageData);
+      const signature = btoa(String.fromCharCode(...new Uint8Array(signatureBuffer)));
+
+      const form = document.createElement('form');
+      form.method = 'POST'; form.action = 'https://rc-epay.esewa.com.np/api/epay/main/v2/form';
+
+      const fields = {
+        amount: finalTotal, tax_amount: 0, product_service_charge: 0, product_delivery_charge: 0,
+        total_amount: finalTotal, transaction_uuid: transactionUuid, product_code: productCode,
+        success_url: window.location.origin + window.location.pathname + '?status=success&method=esewa&id=' + transactionUuid,
+        failure_url: window.location.origin + window.location.pathname + '?status=failed',
+        signed_field_names: 'total_amount,transaction_uuid,product_code', signature: signature
+      };
+
+      for (const [k, v] of Object.entries(fields)) {
+        const input = document.createElement('input'); input.type = 'hidden'; input.name = k; input.value = v; form.appendChild(input);
+      }
+      document.body.appendChild(form); form.submit();
+    } catch (err) {
+      showToast('Signature processing crash.');
+      btn.disabled = false; btn.textContent = 'Place Order';
+    }
+  } 
+  // 🟢 METHOD 2: KHALTI BACKEND SECURE ENVELOPE REDIRECT
+  else if (method === 'khalti') {
+    try {
+      const res = await fetch('/place-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: finalTotal,
+          purchase_order_id: transactionUuid,
+          purchase_order_name: items[0].name + (items.length > 1 ? ' etc' : ''),
+          return_url: window.location.origin + '/place-order?purchase_order_id=' + transactionUuid
+        })
+      });
+
+      const text = await res.text();
+      if (!text || text.trim() === '') {
+        throw new Error("Server returned an empty response.");
+      }
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("Failed to parse JSON. Raw response was:", text);
+        throw new Error("Invalid server response format.");
+      }
+
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+      } else {
+        throw new Error(data.error || 'Gateway Rejected Request');
+      }
+
+    } catch (err) {
+      console.error("Payment error:", err);
+      showToast('Khalti Error: ' + err.message);
+      btn.disabled = false; 
+      btn.textContent = 'Place Order';
+    }
+  }
+  // 🟢 METHOD 3: COD FALLBACK
+  else {
+    setTimeout(() => {
+      document.getElementById('orderUuid').textContent = transactionUuid;
+      document.getElementById('paidVia').textContent = 'Cash on Delivery';
+      document.getElementById('checkoutForm').classList.add('hidden');
+      document.getElementById('orderThankyou').classList.add('show');
+      Cart.clear();
+    }, 1000);
+  }
+} // 💡 Sealed cleanly! All nested conditional statement chains are resolved.
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('loader')?.classList.add('hide'); }, 400);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNICO — Nepali Clothing Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="cart.js"></script>
+<style>
+.launcher .brand-mark {
+  font-family: var(--font-display); font-size: 3.2rem; color: var(--accent); margin-bottom: 4px;
+}
+.launcher .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 36px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="landing.html" class="nav-logo">UNICO</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <a class="dropdown-trigger">Shop</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-menu-inner">
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Categories</div>
+              <a href="shop-hoodies.html">Hoodies</a>
+              <a href="shop-tees.html">Tees</a>
+              <a href="shop-bottoms.html">Bottoms</a>
+            </div>
+            <div class="dropdown-group">
+              <div class="dropdown-group-label">Collections</div>
+              <a href="landing.html#best-sellers">Best Sellers</a>
+              <a href="shop-hoodies.html">New Arrivals</a>
+              <a href="#">Limited Drops</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="checkout.html" class="nav-cart">
+        Cart <span class="nav-cart-count">0</span>
+      </a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <strong style="padding:14px 16px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted)">Categories</strong>
+  <a href="shop-hoodies.html">Hoodies</a>
+  <a href="shop-tees.html">Tees</a>
+  <a href="shop-bottoms.html">Bottoms</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Collections</strong>
+  <a href="landing.html#best-sellers">Best Sellers</a>
+  <a href="shop-hoodies.html">New Arrivals</a>
+  <a href="#">Limited Drops</a>
+  <strong style="padding:14px 16px 6px;display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:8px">Info</strong>
+  <a href="about.html">About</a>
+  <a href="checkout.html">Cart <span class="mobile-cart-count">(0)</span></a>
+</div>
+
+<main class="launcher">
+  <div class="brand-mark">UNICO</div>
+  <p class="sub">Nepali casual wear — handcrafted in Kathmandu</p>
+  <div class="launcher-grid">
+    <a href="landing.html" class="launcher-card">
+      <div class="launcher-card-icon">&#127968;</div>
+      <span>Home</span>
+    </a>
+    <a href="shop-hoodies.html" class="launcher-card">
+      <div class="launcher-card-icon">&#128085;</div>
+      <span>Hoodies</span>
+    </a>
+    <a href="shop-tees.html" class="launcher-card">
+      <div class="launcher-card-icon">&#127788;</div>
+      <span>Tees</span>
+    </a>
+    <a href="shop-bottoms.html" class="launcher-card">
+      <div class="launcher-card-icon">&#128086;</div>
+      <span>Bottoms</span>
+    </a>
+    <a href="checkout.html" class="launcher-card">
+      <div class="launcher-card-icon">&#128722;</div>
+      <span>Checkout</span>
+    </a>
+    <a href="about.html" class="launcher-card">
+      <div class="launcher-card-icon">&#9998;</div>
+      <span>About</span>
+    </a>
+  </div>
+</main>
+
+<script>
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
